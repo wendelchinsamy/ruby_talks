@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: host.docker.internal
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: talks_development
+
+test:
+  <<: *default
+  database: talks_test
+
+production:
+  <<: *default
+  database: talks_production
+  username: talks
+  password: <%= ENV["TALKS_DATABASE_PASSWORD"] %>
